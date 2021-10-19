@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import NoResults from "./NoResults";
-import { fetchProducts } from "../actions/productActions";
+import { fetchData } from "../reducers/productReducer";
 
 class CartPage extends Component {
   componentDidMount() {
-    const { fetchAllProducts } = this.props;
-    fetchAllProducts();
+    const { fetchData } = this.props;
+    fetchData();
   }
 
   render() {
@@ -48,12 +48,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAllProducts: bindActionCreators(fetchProducts, dispatch),
+    fetchData: bindActionCreators(fetchData, dispatch),
   };
 }
 
 CartPage.propTypes = {
-  fetchAllProducts: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   productsList: PropTypes.arrayOf(
     PropTypes.shape({
       brand: PropTypes.string.isRequired,

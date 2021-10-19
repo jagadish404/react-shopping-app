@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { fetchProducts, addProductToCart } from "../actions/productActions";
 import "../../css/productDetails.css";
 
 class ProductDetails extends Component {
@@ -66,16 +65,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    fetchAllProducts: bindActionCreators(fetchProducts, dispatch),
-    addItemToCart: bindActionCreators(addProductToCart, dispatch),
-  };
+  return {};
 }
 
 ProductDetails.propTypes = {
   productIndex: PropTypes.number,
-  fetchAllProducts: PropTypes.func.isRequired,
-  addItemToCart: PropTypes.func.isRequired,
   productsList: PropTypes.arrayOf(
     PropTypes.shape({
       brand: PropTypes.string.isRequired,
