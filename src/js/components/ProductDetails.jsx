@@ -59,7 +59,7 @@ class ProductDetails extends Component {
 
 function mapStateToProps(state) {
   return {
-    productsList: state.productsData.productsList,
+    productsList: state.products.entities,
   };
 }
 

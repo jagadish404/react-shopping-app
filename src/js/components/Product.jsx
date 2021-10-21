@@ -58,7 +58,7 @@ Product.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    productsList: state.products.productsList,
+    productsList: state.products.entities,
   };
 }
 

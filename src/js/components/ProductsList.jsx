@@ -85,7 +85,7 @@ class ProductsList extends Component {
 
 function mapStateToProps(state) {
   return {
-    productsList: state.products.productsList,
+    productsList: state.products.entities,
     filters: state.filters.items,
     filtersSelected: state.filters.selected,
   };

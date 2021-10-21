@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  productsList: [],
+  entities: [],
 };
 
 export const fetchData = createAsyncThunk("products/fetchData", async () => {
@@ -33,19 +33,19 @@ const productSlice = createSlice({
       let filteredProducts = [];
 
       if (type === "price") {
-        filteredProducts = filterProductsByPrice(value, state.productsList);
+        filteredProducts = filterProductsByPrice(value, state.entities);
       } else if (type === "brand") {
-        filteredProducts = state.productsList.filter(({ brand }) => brand === value);
+        filteredProducts = state.entities.filter(({ brand }) => brand === value);
       } else {
-        filteredProducts = state.productsList;
+        filteredProducts = state.entities;
       }
 
-      state.productsList = filteredProducts;
+      state.entities = filteredProducts;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.productsList = action.payload.products;
+      state.entities = action.payload.products;
     });
   },
 });
