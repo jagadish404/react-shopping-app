@@ -42,7 +42,7 @@ class CartPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    productsList: state.cart.items,
+    productsList: state.cart.entities,
   };
 }
 
