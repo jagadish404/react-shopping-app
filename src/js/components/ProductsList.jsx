@@ -33,25 +33,31 @@ class ProductsList extends Component {
   }
 
   getFilteredProducts() {
-    const { productsList, filtersSelected } = this.props;
+    const {
+      productsList,
+      filtersSelected: { price: priceFilter, brand: brandFilter },
+    } = this.props;
 
-    return productsList.filter(({brand, price}) => {
-      const index = filtersSelected.findIndex(({type, value}) => {
-        if (type === "price") {
-          const [minPrice, maxPrice] = value.split("-");
-          return minPrice < price && price < maxPrice;
-        } else {
-          return brand === value;
-        }
-      })
+    if (priceFilter?.length === 0 && brandFilter?.length === 0) {
+      return productsList;
+    }
 
-      return index !== -1;
-    })
+    return productsList.filter(({ brand, price }) => {
+      const index = priceFilter.findIndex((value) => {
+        const [minPrice, maxPrice] = value.split("-");
+        return minPrice < price && price < maxPrice;
+      });
+      const includesPrice = priceFilter?.length > 0 && index !== -1;
+
+      return (
+        (priceFilter?.length === 0 || includesPrice) && (brandFilter?.length === 0 || brandFilter?.includes(brand))
+      );
+    });
   }
 
   render() {
     const { filtersSelected, filters, productsList } = this.props;
-    const filteredProducts = filtersSelected.length ? this.getFilteredProducts() : productsList;
+    const filteredProducts = this.getFilteredProducts();
 
     return (
       <div className="App-page">
@@ -86,7 +92,7 @@ class ProductsList extends Component {
 function mapStateToProps(state) {
   return {
     productsList: state.products.entities,
-    filters: state.filters.items,
+    filters: state.filters.entities,
     filtersSelected: state.filters.selected,
   };
 }
@@ -109,12 +115,14 @@ ProductsList.propTypes = {
       price: PropTypes.string.isRequired,
     })
   ).isRequired,
-  filtersSelected: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  filtersSelected: PropTypes.shape({
+    [PropTypes.string]: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+      })
+    ),
+  }).isRequired,
   filters: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
