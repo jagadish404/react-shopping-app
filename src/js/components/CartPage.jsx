@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import NoResults from "./NoResults";
-import { fetchData } from "../reducers/productReducer";
+import { fetchData } from "../reducers/productSlice";
 
 class CartPage extends Component {
   componentDidMount() {

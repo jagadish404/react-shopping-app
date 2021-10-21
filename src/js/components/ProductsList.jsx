@@ -9,8 +9,8 @@ import NoResults from "./NoResults";
 
 import "../../css/productsList.css";
 
-import { fetchData, filterProductsBy } from "../reducers/productReducer";
-import { selectFilter } from "../reducers/filterReducer";
+import { fetchData, filterProductsBy } from "../reducers/productSlice";
+import { selectFilter } from "../reducers/filterSlice";
 import FilterSection from "./FilterSection";
 
 class ProductsList extends Component {

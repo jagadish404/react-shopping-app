@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "./productReducer";
+import { fetchData } from "./productSlice";
 
 const initialState = {
   entities: [],
