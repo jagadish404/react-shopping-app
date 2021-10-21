@@ -2,36 +2,39 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "./productReducer";
 
 const initialState = {
-  items: [],
-  selected: [],
+  entities: [],
+  selected: {},
 };
 
 export const counterSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    initializeFilter: (state, action) => {
-      state.selected.items = action.payload;
-    },
     selectFilter: (state, action) => {
-      const index = state.selected.findIndex(
-        ({ type, value }) => type === action.payload.type && value === action.payload.value
-      );
+      const { type: filterType, value: filterValue } = action.payload;
+      const index = state.selected[filterType].findIndex((value) => value === filterValue);
       if (index !== -1) {
-        state.selected.splice(index, 1);
+        state.selected[filterType].splice(index, 1);
       } else {
-        state.selected.push(action.payload);
+        state.selected[filterType].push(filterValue);
       }
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.items = action.payload.filters;
+      const { filters } = action.payload;
+      state.entities = action.payload.filters;
+
+      if (filters.length) {
+        filters.forEach(({ name }) => {
+          state.selected[name] = [];
+        });
+      }
     });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { selectFilter, initializeFilter } = counterSlice.actions;
+export const { selectFilter } = counterSlice.actions;
 
 export default counterSlice.reducer;
