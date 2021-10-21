@@ -14,7 +14,14 @@ export const counterSlice = createSlice({
       state.selected.items = action.payload;
     },
     selectFilter: (state, action) => {
-      state.selected.push(action.payload);
+      const index = state.selected.findIndex(
+        ({ type, value }) => type === action.payload.type && value === action.payload.value
+      );
+      if (index !== -1) {
+        state.selected.splice(index, 1);
+      } else {
+        state.selected.push(action.payload);
+      }
     },
   },
   extraReducers: (builder) => {
