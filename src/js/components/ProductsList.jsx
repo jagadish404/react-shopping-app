@@ -17,7 +17,6 @@ class ProductsList extends Component {
   constructor() {
     super();
     this.updateFilter = this.updateFilter.bind(this);
-    this.getFilteredProducts = this.getFilteredProducts.bind(this);
   }
 
   componentDidMount() {
@@ -106,8 +105,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 ProductsList.propTypes = {
-  // fetchAllProducts: PropTypes.func.isRequired,
-  // updateFilters: PropTypes.func.isRequired,
   productsList: PropTypes.arrayOf(
     PropTypes.shape({
       brand: PropTypes.string.isRequired,
