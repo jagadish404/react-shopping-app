@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import PropTypes, { element } from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import Product from "./Product";
@@ -11,20 +11,13 @@ import "../../css/productsList.css";
 
 import { fetchData, filterProductsBy } from "../reducers/productReducer";
 import { selectFilter } from "../reducers/filterReducer";
+import FilterSection from "./FilterSection";
 
 class ProductsList extends Component {
   constructor() {
     super();
-    this.state = {
-      filters: [],
-    };
     this.updateFilter = this.updateFilter.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      filters: nextProps.filters,
-    });
+    this.getFilteredProducts = this.getFilteredProducts.bind(this);
   }
 
   componentDidMount() {
@@ -33,21 +26,33 @@ class ProductsList extends Component {
   }
 
   updateFilter(e) {
-    const { selectFilter, filterProductsBy, filtersSelected } = this.props;
+    const { selectFilter } = this.props;
     const [type, value] = e.target.getAttribute("data-filter").split("_");
-    const index = filtersSelected.findIndex((element) => element.type === type && element.value === value);
 
-    if (index === -1) {
-      filterProductsBy({ type, value });
-    }
     selectFilter({ type, value });
   }
 
-  render() {
-    const { productsList, filtersSelected, filters } = this.props;
-    const filteredProducts = productsList;
+  getFilteredProducts() {
+    const { productsList, filtersSelected } = this.props;
 
-    console.log(`filtersSelected`, filters);
+    return productsList.filter(({brand, price}) => {
+      const index = filtersSelected.findIndex(({type, value}) => {
+        if (type === "price") {
+          const [minPrice, maxPrice] = value.split("-");
+          return minPrice < price && price < maxPrice;
+        } else {
+          return brand === value;
+        }
+      })
+
+      return index !== -1;
+    })
+  }
+
+  render() {
+    const { filtersSelected, filters, productsList } = this.props;
+    const filteredProducts = filtersSelected.length ? this.getFilteredProducts() : productsList;
+
     return (
       <div className="App-page">
         <div className="App-header">
@@ -61,31 +66,7 @@ class ProductsList extends Component {
         </div>
         <div className="App-body">
           <div className="Left-panel">
-            <div>
-              {this.state.filters.map((filter) => (
-                <div className="Product-filters" key={filter.name}>
-                  <div className="Product-filter-name">{filter.name}</div>
-                  {filter.values.map((value) => (
-                    <div className="Product-filter-value" key={`${filter.name}_${value}`}>
-                      <input
-                        type="checkbox"
-                        data-filter={`${filter.name}_${value}`}
-                        id={`${filter.name}_${value}`}
-                        name={filter.name}
-                        onChange={this.updateFilter}
-                        checked={
-                          filtersSelected.length &&
-                          filtersSelected.findIndex(
-                            (filterData) => filterData.type === filter.name && filterData.value === value
-                          ) !== -1
-                        }
-                      />
-                      <label htmlFor={`${filter.name}_${value}`}>{value}</label>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+            <FilterSection filters={filters} filtersSelected={filtersSelected} onFilterChange={this.updateFilter} />
           </div>
           <div className="Products-grid">
             {filteredProducts.length > 0 ? (
