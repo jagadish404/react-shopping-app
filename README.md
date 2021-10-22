@@ -20,7 +20,7 @@ You can follow the below steps to run the app on your local machine.
   ```
   npm install
   ```
-  or 
+  OR 
   ```
   yarn
   ```
@@ -30,7 +30,7 @@ You can follow the below steps to run the app on your local machine.
   ```
   npm run start
   ```
-  or
+  OR
   ```
   yarn start
   ```
