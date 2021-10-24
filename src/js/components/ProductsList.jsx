@@ -61,6 +61,7 @@ class ProductsList extends Component {
     return (
       <div className="App-page">
         <div className="App-header">
+          <h2 className="App-title">React Store</h2>
           <div>
             <Link to="/CartPage">
               <button type="button" className="App-button Cart-button">
