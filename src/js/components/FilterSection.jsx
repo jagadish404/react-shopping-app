@@ -1,8 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class FilterSection extends Component {
   render() {
-    const {filters, filtersSelected, onFilterChange} = this.props;
+    const { filters, filtersSelected, onFilterChange } = this.props;
+    if (filters.length === 0) {
+      return <div>No filters!!</div>;
+    }
+
     return (
       <div>
         {filters.map((filter) => (
@@ -29,6 +33,6 @@ export default class FilterSection extends Component {
           </div>
         ))}
       </div>
-    )
+    );
   }
 }
