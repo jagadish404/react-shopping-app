@@ -24,7 +24,7 @@ class Product extends Component {
     return (
       <div className="Product-card">
         <Link to={`/ProductDetails/${productIndex}`}>
-          <img className="Product-icon" alt={image} src={`./assets/${image}`} />
+          <img data-testid="product-image" className="Product-icon" alt={image} src={`./assets/${image}`} />
         </Link>
         <span className="Product-name">{name}</span>
         <span className="Product-price">${price}</span>
