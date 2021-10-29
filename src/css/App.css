@@ -83,6 +83,10 @@
 	flex: 0 0 auto;
 }
 
+.Right-panel {
+	flex: 1;
+}
+
 .Product-filters {
 	margin-bottom: 2em;
 }

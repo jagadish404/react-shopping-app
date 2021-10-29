@@ -55,7 +55,7 @@ class ProductsList extends Component {
   }
 
   render() {
-    const { filtersSelected, filters, productsList } = this.props;
+    const { filtersSelected, filters, fetchStatus } = this.props;
     const filteredProducts = this.getFilteredProducts();
 
     return (
@@ -74,14 +74,25 @@ class ProductsList extends Component {
           <div className="Left-panel">
             <FilterSection filters={filters} filtersSelected={filtersSelected} onFilterChange={this.updateFilter} />
           </div>
-          <div className="Products-grid">
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((product, index) => (
-                <Product key={`${product.brand}_${product.name}_${product.price}`} {...product} productIndex={index} />
-              ))
-            ) : (
-              <NoResults content="No results!!!!!!!" />
+          <div className="Right-panel">
+            <h4>Products List</h4>
+            {fetchStatus === "pending" && <div>Loading products..</div>}
+            {fetchStatus === "fulfilled" && (
+              <div className="Products-grid">
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((product, index) => (
+                    <Product
+                      key={`${product.brand}_${product.name}_${product.price}`}
+                      {...product}
+                      productIndex={index}
+                    />
+                  ))
+                ) : (
+                  <NoResults content="No products!" />
+                )}
+              </div>
             )}
+            {fetchStatus === "failed" && <div>Error while fetching data!!</div>}
           </div>
         </div>
       </div>
@@ -92,6 +103,7 @@ class ProductsList extends Component {
 function mapStateToProps(state) {
   return {
     productsList: state.products.entities,
+    fetchStatus: state.products.status,
     filters: state.filters.entities,
     filtersSelected: state.filters.selected,
   };
@@ -127,6 +139,7 @@ ProductsList.propTypes = {
       values: PropTypes.arrayOf(PropTypes.string.isRequired),
     })
   ).isRequired,
+  fetchStatus: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

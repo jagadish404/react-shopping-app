@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   entities: [],
+  status: "idle",
 };
 
 export const fetchData = createAsyncThunk("products/fetchData", async () => {
@@ -46,6 +47,13 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
       state.entities = action.payload.products;
+      state.status = "fulfilled";
+    });
+    builder.addCase(fetchData.pending, (state, _action) => {
+      state.status = "pending";
+    });
+    builder.addCase(fetchData.rejected, (state, _action) => {
+      state.status = "failed";
     });
   },
 });
