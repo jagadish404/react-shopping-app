@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 import Product from "./Product";
 import NoResults from "./NoResults";
@@ -12,6 +11,7 @@ import "../../css/productsList.css";
 import { fetchData, filterProductsBy } from "../reducers/productSlice";
 import { selectFilter } from "../reducers/filterSlice";
 import FilterSection from "./FilterSection";
+import Header from "./Header";
 
 class ProductsList extends Component {
   constructor() {
@@ -60,16 +60,7 @@ class ProductsList extends Component {
 
     return (
       <div className="App-page">
-        <div className="App-header">
-          <h2 className="App-title">React Store</h2>
-          <div>
-            <Link to="/CartPage">
-              <button type="button" className="App-button Cart-button">
-                Cart
-              </button>
-            </Link>
-          </div>
-        </div>
+        <Header />
         <div className="App-body">
           <div className="Left-panel">
             <FilterSection filters={filters} filtersSelected={filtersSelected} onFilterChange={this.updateFilter} />
@@ -83,7 +74,7 @@ class ProductsList extends Component {
                   filteredProducts.map((product, index) => (
                     <Product
                       key={`${product.brand}_${product.name}_${product.price}`}
-                      {...product}
+                      product={product}
                       productIndex={index}
                     />
                   ))

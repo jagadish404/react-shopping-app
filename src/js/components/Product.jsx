@@ -14,12 +14,15 @@ class Product extends Component {
   }
 
   addToCart() {
-    const { addItemToCart, productsList, productIndex } = this.props;
-    addItemToCart(productsList[productIndex]);
+    const { addItemToCart, product } = this.props;
+    addItemToCart(product);
   }
 
   render() {
-    const { productIndex, image, name, price, count } = this.props;
+    const {
+      productIndex,
+      product: { image, name, price, count },
+    } = this.props;
 
     return (
       <div className="Product-card">
@@ -37,30 +40,19 @@ class Product extends Component {
 }
 
 Product.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  product: PropTypes.shape({
+    brand: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+  }),
   count: PropTypes.number,
   productIndex: PropTypes.number.isRequired,
   addItemToCart: PropTypes.func.isRequired,
-  productsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      brand: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };
 
 Product.defaultProps = {
   count: 0,
 };
-
-function mapStateToProps(state) {
-  return {
-    productsList: state.products.entities,
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -68,4 +60,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(undefined, mapDispatchToProps)(Product);
