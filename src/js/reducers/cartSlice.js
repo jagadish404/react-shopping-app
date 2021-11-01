@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   entities: [],
+  count: 0,
 };
 
 export const counterSlice = createSlice({
@@ -10,6 +11,7 @@ export const counterSlice = createSlice({
   reducers: {
     addItemToCart: (state, action) => {
       state.entities.push(action.payload);
+      state.count += 1;
     },
   },
 });
