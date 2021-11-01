@@ -28,7 +28,11 @@ class CartPage extends Component {
           <div className="Products-grid">
             {productsList.length > 0 ? (
               productsList.map((product, index) => (
-                <Product key={`${product.brand}_${product.name}_${product.price}`} {...product} productIndex={index} />
+                <Product
+                  key={`${product.brand}_${product.name}_${product.price}`}
+                  product={product}
+                  productIndex={index}
+                />
               ))
             ) : (
               <NoResults content="No products added to cart!" />
