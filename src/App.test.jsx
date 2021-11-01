@@ -49,6 +49,7 @@ describe("Test suite for App component", () => {
   });
 
   it("Should render Product Detail for NutriWell Barley product", async () => {
+    const nutriWellBarleyProductDescription = /F&N NutriWell Barley is freshly brewed from a special home recipe/i;
     fetch.mockResponseOnce(JSON.stringify(productData));
     render(setup(<App />));
 
@@ -58,10 +59,6 @@ describe("Test suite for App component", () => {
     expect(screen.queryByText("Products List")).not.toBeInTheDocument();
     expect(screen.getByText("NutriWell Barley")).toBeInTheDocument();
     expect(screen.getByText(/2.25/i)).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /F&N NutriWell Barley is freshly brewed from a special home recipe using carefully selected pearl barley and dried winter melon strips. Barley, a grain full of pure goodness, is commonly used in home-brews, to make that familiar barley drink or in soups. All natural, with no added preservatives and reduced in sugar, F&N NutriWell Barley is the great-tasting, 'healthier-choice' convenient beverage to cool you down in this tropical climate. Make drinking F&N NutriWell a daily enjoyment./i
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(nutriWellBarleyProductDescription)).toBeInTheDocument();
   });
 });
