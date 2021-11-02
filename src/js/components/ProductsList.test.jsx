@@ -12,9 +12,7 @@ beforeEach(() => {
 describe("Test suite for ProductsList component", () => {
   it("Should render ProductsList component with error in fetching", async () => {
     fetch.mockReject(() => "Network error.");
-    act(() => {
-      render(<ProductsList />);
-    });
+    render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();
     expect(screen.getByText("Loading products..")).toBeInTheDocument();
@@ -23,9 +21,7 @@ describe("Test suite for ProductsList component", () => {
 
   it("Should render ProductsList component with products list", async () => {
     fetch.mockResponseOnce(JSON.stringify(productData));
-    act(() => {
-      render(<ProductsList />);
-    });
+    render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();
     expect(screen.getByText("Loading products..")).toBeInTheDocument();
@@ -36,9 +32,7 @@ describe("Test suite for ProductsList component", () => {
 
   it("Should add item to cart and increase the count of items by 1", async () => {
     fetch.mockResponseOnce(JSON.stringify(productData));
-    act(() => {
-      render(<ProductsList />);
-    });
+    render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();
     expect(screen.getByText("Loading products..")).toBeInTheDocument();
