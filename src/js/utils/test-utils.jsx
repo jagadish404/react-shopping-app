@@ -2,7 +2,8 @@ import React from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
 
 import productsReducer from "../reducers/productSlice";
 import cartReducer from "../reducers/cartSlice";
@@ -11,6 +12,7 @@ import filterReducer from "../reducers/filterSlice";
 function render(
   ui,
   {
+    route = "/",
     preloadedState,
     store = configureStore({
       reducer: {
@@ -24,9 +26,11 @@ function render(
   } = {}
 ) {
   function Wrapper({ children }) {
+    const history = createMemoryHistory();
+    window.history.pushState({}, "Home Page", route);
     return (
       <Provider store={store}>
-        <BrowserRouter>{children}</BrowserRouter>
+        <Router history={history}>{children}</Router>
       </Provider>
     );
   }
