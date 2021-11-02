@@ -1,33 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Product from "./Product";
 import NoResults from "./NoResults";
-import { fetchData } from "../reducers/productSlice";
+import Header from "./Header";
 
-class CartPage extends Component {
-  componentDidMount() {
-    const { fetchData } = this.props;
-    fetchData();
-  }
-
-  render() {
-    const { productsList } = this.props;
-    return (
-      <div className="App-page">
-        <div className="App-header">
-          <Link to="/">
-            <button type="button" className="App-button Cart-button">
-              Browse
-            </button>
-          </Link>
-        </div>
-        <div className="App-body">
-          <div className="Products-grid">
-            {productsList.length > 0 ? (
-              productsList.map((product, index) => (
+function CartPage() {
+  const { entities: cartItems, count } = useSelector((state) => state.cart);
+  return (
+    <div className="App-page">
+      <Header />
+      <div className="App-body">
+        <div className="Right-panel">
+          <h3>My Cart({count})</h3>
+          <div className="Products-grid cart-page">
+            {count > 0 ? (
+              cartItems.map((product, index) => (
                 <Product
                   key={`${product.brand}_${product.name}_${product.price}`}
                   product={product}
@@ -40,20 +28,8 @@ class CartPage extends Component {
           </div>
         </div>
       </div>
-    );
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    productsList: state.cart.entities,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchData: bindActionCreators(fetchData, dispatch),
-  };
+    </div>
+  );
 }
 
 CartPage.propTypes = {
@@ -67,4 +43,4 @@ CartPage.propTypes = {
   ).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
+export default CartPage;
