@@ -32,15 +32,4 @@ function CartPage() {
   );
 }
 
-CartPage.propTypes = {
-  fetchData: PropTypes.func.isRequired,
-  productsList: PropTypes.arrayOf(
-    PropTypes.shape({
-      brand: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
 export default CartPage;
