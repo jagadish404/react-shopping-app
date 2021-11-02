@@ -17,26 +17,29 @@ function ProductDetails() {
     dispatch(addItemToCart(productsList[productIndex]));
   };
 
-  if (productsData == void 0) return null;
   return (
     <div className="App-page">
       <Header />
-      <div className="Product-details-wrapper">
-        <div className="Product-name-detail">{productsData.name}</div>
-        <div className="Product-row">
-          <div className="Product-left-column">
-            <img className="Product-icon-details" alt={productsData.image} src={`../assets/${productsData.image}`} />
-          </div>
-          <div className="Product-right-column">
-            <div className="Product-measurement">{productsData.measurement}</div>
-            <div className="Product-price">${productsData.price}</div>
-            <div className="Product-desc">{productsData.desc}</div>
-            <button type="button" className="Add-to-cart-button" onClick={addToCart}>
-              Add To Cart
-            </button>
+      {productsData == void 0 ? (
+        <div>Error fetching product details!</div>
+      ) : (
+        <div className="Product-details-wrapper">
+          <div className="Product-name-detail">{productsData.name}</div>
+          <div className="Product-row">
+            <div className="Product-left-column">
+              <img className="Product-icon-details" alt={productsData.image} src={`../assets/${productsData.image}`} />
+            </div>
+            <div className="Product-right-column">
+              <div className="Product-measurement">{productsData.measurement}</div>
+              <div className="Product-price">${productsData.price}</div>
+              <div className="Product-desc">{productsData.desc}</div>
+              <button type="button" className="Add-to-cart-button" onClick={addToCart}>
+                Add To Cart
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
