@@ -6,7 +6,9 @@ const Header = () => {
   const itemsCount = useSelector((state) => state.cart.count);
   return (
     <div className="App-header">
-      <h2 className="App-title">React Store</h2>
+      <h2 className="App-title">
+        <Link to="/">React Store</Link>
+      </h2>
       <div>
         <Link to="/CartPage">
           <button type="button" className="App-button Cart-button" data-testid="cart-button">
