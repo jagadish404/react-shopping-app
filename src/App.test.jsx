@@ -27,7 +27,7 @@ describe("Test suite for App component", () => {
     fireEvent.click(screen.getByText(/Cart/i));
     expect(screen.queryByText("Products List")).not.toBeInTheDocument();
     expect(screen.getByText("No products added to cart!")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Browse"));
+    fireEvent.click(screen.getByText("React Store"));
   });
 
   it("Should render Product Detail for NutriWell Barley product", async () => {
