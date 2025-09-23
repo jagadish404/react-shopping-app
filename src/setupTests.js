@@ -1,4 +1,8 @@
 import "@testing-library/jest-dom";
-import fetchMock from "jest-fetch-mock";
+import { vi } from "vitest";
 
-fetchMock.enableMocks();
+// Setup global fetch mock for Vitest
+Object.defineProperty(window, "fetch", {
+  writable: true,
+  value: vi.fn(),
+});

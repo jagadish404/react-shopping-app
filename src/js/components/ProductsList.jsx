@@ -36,6 +36,7 @@ class ProductsList extends Component {
       productsList,
       filtersSelected: { price: priceFilter, brand: brandFilter },
     } = this.props;
+    console.log('productsList', productsList)
 
     if (priceFilter?.length === 0 && brandFilter?.length === 0) {
       return productsList;
@@ -57,6 +58,7 @@ class ProductsList extends Component {
   render() {
     const { filtersSelected, filters, fetchStatus } = this.props;
     const filteredProducts = this.getFilteredProducts();
+    console.log('fetchStatus', fetchStatus)
 
     return (
       <div className="App-page">
