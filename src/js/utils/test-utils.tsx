@@ -16,7 +16,7 @@ export type RootState = {
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
   route?: string;
-  preloadedState?: PreloadedState<RootState>;
+  preloadedState?: Partial<RootState>;
   store?: ReturnType<typeof configureStore>;
 }
 
@@ -42,7 +42,9 @@ function render(
   }
 
   function Wrapper({ children }: { children?: React.ReactNode }) {
-    return <Provider store={store}>{children}</Provider>;
+    const content = <Provider store={store}>{children}</Provider>;
+
+    return content;
   }
 
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });

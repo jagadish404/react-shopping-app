@@ -1,17 +1,21 @@
 import React from "react";
 import { render, screen, fireEvent } from "../utils/test-utils";
-import { act } from "react-dom/test-utils";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import ProductsList from "./ProductsList";
 import productData from "../../../public/data/products.json";
 
+// Mock fetch globally
+global.fetch = vi.fn();
+
 beforeEach(() => {
-  fetch.resetMocks();
+  vi.resetAllMocks();
 });
 
 describe("Test suite for ProductsList component", () => {
   it("Should render ProductsList component with error in fetching", async () => {
-    fetch.mockReject(() => "Network error.");
+    (global.fetch as any).mockRejectedValueOnce(new Error("Network error."));
+
     render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();
@@ -20,7 +24,11 @@ describe("Test suite for ProductsList component", () => {
   });
 
   it("Should render ProductsList component with products list", async () => {
-    fetch.mockResponseOnce(JSON.stringify(productData));
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => productData,
+    });
+
     render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();

@@ -1,17 +1,25 @@
 import React from "react";
 import { render, screen, fireEvent } from "../utils/test-utils";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import ProductsList from "./ProductsList";
 import productData from "../../../public/data/products.json";
 import Product from "./Product";
 
+// Mock fetch globally
+global.fetch = vi.fn();
+
 beforeEach(() => {
-  fetch.resetMocks();
+  vi.resetAllMocks();
 });
 
 describe("Test suite for Products component", () => {
   it("Should render component with data provided by props", async () => {
-    fetch.mockResponseOnce(JSON.stringify(productData));
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => productData,
+    });
+
     render(<Product product={productData.products[0]} productIndex={0} />);
 
     expect(screen.getByText(productData.products[0].name)).toBeInTheDocument();
@@ -19,7 +27,11 @@ describe("Test suite for Products component", () => {
   });
 
   it("Should add item to cart and increase the count of items by 1", async () => {
-    fetch.mockResponseOnce(JSON.stringify(productData));
+    (global.fetch as any).mockResolvedValueOnce({
+      ok: true,
+      json: async () => productData,
+    });
+
     render(<ProductsList />);
 
     expect(screen.getByText("Products List")).toBeInTheDocument();

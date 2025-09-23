@@ -1,11 +1,15 @@
 import React from "react";
 import { render, screen } from "../utils/test-utils";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import App from "../../App";
 import productData from "../../../public/data/products.json";
 
+// Mock fetch globally
+global.fetch = vi.fn();
+
 beforeEach(() => {
-  fetch.resetMocks();
+  vi.resetAllMocks();
 });
 
 describe("Test suite for ProductDetails component", () => {
@@ -22,7 +26,11 @@ describe("Test suite for ProductDetails component", () => {
         status: "idle",
       },
     };
-    render(<App />, { preloadedState, route: "/ProductDetails/0" });
+    render(<App />, {
+      preloadedState,
+      route: "/ProductDetails/0",
+      withRouter: false,
+    });
 
     expect(await screen.findByText(productData.products[0].name)).toBeInTheDocument();
     expect(screen.getByText(productData.products[0].desc)).toBeInTheDocument();
