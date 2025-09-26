@@ -1,46 +1,142 @@
-# react-shopping-app
+# 🛒 React Shopping App
 
-React single page application to shop products with filters, view cart and product description page
+A modern React single page application for shopping products with advanced filtering, cart management, and detailed product views. Built with TypeScript, Vite, and comprehensive testing.
 
-### This app has below features
+## ✨ Features
 
-1. View products in Landing page
-2. Filter products by (a) Brand (b) Price
-3. Add any number of products to cart
-4. View the product in details
-5. View the products added to cart
+- 🏪 **Product Catalog** - Browse products with responsive grid layout
+- 🔍 **Smart Filtering** - Filter by brand and price range
+- 🛒 **Shopping Cart** - Add/remove products with real-time updates
+- 📄 **Product Details** - Detailed product information pages
+- 🧪 **Comprehensive Testing** - Full test coverage with Vitest
+- 🎯 **Type Safety** - Full TypeScript implementation
 
-### Technologies used:
+## 🚀 Technologies Used
 
-1. React - React.js framework used to buil the front-end of the app
-2. Redux - To manage the state of application
+- **React 18** - Modern React with hooks and concurrent features
+- **TypeScript** - Type-safe development with enhanced IDE support
+- **Redux Toolkit** - Efficient state management with modern Redux patterns
+- **React Router v6** - Client-side routing with latest API
+- **Vite** - Lightning-fast build tool and dev server
+- **Vitest** - Fast unit testing framework
+- **Testing Library** - Comprehensive component testing utilities
 
-### How to run the application?
+## 🏗️ Architecture
 
-You can follow the below steps to run the app on your local machine.
+- **Component-based** - Modular, reusable React components
+- **Redux Store** - Centralized state management for products, cart, and filters
+- **TypeScript Interfaces** - Strongly typed props and state
+- **Modern Hooks** - Functional components with React hooks
 
-1. Install the required packages by running
+## 📦 Installation & Setup
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/jagadish404/react-shopping-app
+   cd react-shopping-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pnpm install
+   ```
+   or
+   ```bash
+   npm install
+   ```
+
+### Development
+
+**Start the development server:**
+
+```bash
+pnpm dev
+```
+
+or
+
+```bash
+npm run dev
+```
+
+The app will open at `http://localhost:3000`
+
+### Testing
+
+**Run tests:**
+
+```bash
+pnpm test
+```
+
+**Run tests with coverage:**
+
+```bash
+pnpm test:coverage
+```
+
+### Production Build
+
+**Build for production:**
+
+```bash
+pnpm build
+```
+
+**Preview production build:**
+
+```bash
+pnpm preview
+```
+
+## 🧪 Testing
+
+This project includes comprehensive test coverage:
+
+- Unit tests for most of the components
+- Integration tests for Redux store
+- ~~User interaction testing~~
+- TypeScript type checking
+
+## 🔧 Development Scripts
+
+| Command              | Description              |
+| -------------------- | ------------------------ |
+| `pnpm dev`           | Start development server |
+| `pnpm build`         | Build for production     |
+| `pnpm preview`       | Preview production build |
+| `pnpm test`          | Run tests                |
+| `pnpm test:ui`       | Run tests with UI        |
+| `pnpm test:coverage` | Run tests with coverage  |
+
+## 📁 Project Structure
 
 ```
-npm install
+src/
+├── components/         # React components
+├── js/
+│   ├── components/    # Feature components
+│   ├── reducers/      # Redux slices
+│   ├── types/         # TypeScript definitions
+│   └── utils/         # Utility functions
+├── css/               # Stylesheets
+└── store.ts          # Redux store configuration
 ```
 
-OR
+## 🌟 Recent Updates
 
-```
-yarn
-```
+This app has been modernized with:
 
-If you have already installed them then goto next step
-
-2. To open the app on your default browser using below command
-
-```
-npm run start
-```
-
-OR
-
-```
-yarn start
-```
+- ⚡ **Vite** for faster development and builds
+- 🛡️ **Full TypeScript** migration for type safety
+- 🧪 **Vitest** for modern testing
+- ⚛️ **React 18** with latest patterns
+- 🔄 **Redux Toolkit** for efficient state management

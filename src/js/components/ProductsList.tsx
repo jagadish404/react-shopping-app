@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Product from "./Product";
 import NoResults from "./NoResults";
@@ -10,11 +10,11 @@ import { fetchData } from "../reducers/productSlice";
 import { selectFilter } from "../reducers/filterSlice";
 import FilterSection from "./FilterSection";
 import Header from "./Header";
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 import { FilterType } from "../types";
 
 const ProductsList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { entities: productsList, status: fetchStatus } = useSelector((state: RootState) => state.products);
   const { entities: filters, selected: filtersSelected } = useSelector((state: RootState) => state.filters);
   const filteredProducts = getFilteredProducts();

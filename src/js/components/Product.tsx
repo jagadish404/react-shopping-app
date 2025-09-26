@@ -1,20 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addItemToCart } from "../reducers/cartSlice";
+import { ProductData } from "@/js/types";
 
 import "../../css/productsList.css";
-
-// Define the product interface
-interface ProductData {
-  brand: string;
-  name: string;
-  price: string;
-  image: string;
-  desc?: string;
-  measurement?: string;
-  count?: number;
-}
+import { useAppDispatch } from "@/store";
 
 // Define the component props interface
 interface ProductProps {
@@ -24,7 +14,7 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ product, productIndex, count = 0 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { image, name, price } = product;
 

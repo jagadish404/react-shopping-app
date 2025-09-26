@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductData } from "../components/Product";
+import { ProductData } from "@/js/types";
 
 interface CartState {
   entities: ProductData[];
@@ -16,7 +16,6 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      console.log("state", state);
       state.entities.push(action.payload);
       state.count += 1;
     },

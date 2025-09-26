@@ -7,11 +7,11 @@ import productData from "../../../public/data/products.json";
 const mockProduct = productData.products[0];
 const mockDispatch = vi.fn();
 
-vi.mock("react-redux", async (importActual) => {
+vi.mock("@/store", async (importActual) => {
   const actual = (await importActual()) as typeof ReactRedux;
   return {
     ...actual,
-    useDispatch: vi.fn(() => mockDispatch),
+    useAppDispatch: vi.fn(() => mockDispatch),
   };
 });
 

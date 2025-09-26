@@ -1,10 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { addItemToCart } from "../reducers/cartSlice";
 import Header from "./Header";
 import "../../css/productDetails.css";
-import { RootState } from "@/store";
+import { RootState, useAppDispatch } from "@/store";
 
 function ProductDetails() {
   const productsList = useSelector((state: RootState) => state.products.entities);
@@ -15,7 +15,7 @@ function ProductDetails() {
   }
 
   const productIndex = parseInt(index);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const productsData = productsList[productIndex];
 
   const addToCart = () => {
