@@ -1,6 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ProductData } from "@/js/types";
 
-const initialState = {
+interface ProductSliceData {
+  entities: ProductData[];
+  status: "idle" | "pending" | "fulfilled" | "failed";
+}
+
+const initialState: ProductSliceData = {
   entities: [],
   status: "idle",
 };
@@ -16,7 +22,7 @@ export const fetchData = createAsyncThunk("products/fetchData", async () => {
   return res;
 });
 
-const filterProductsByPrice = (value, list) => {
+const filterProductsByPrice = (value: string, list: ProductData[]) => {
   let [priceRangeStart, priceRangeEnd] = value.split("-");
   let filteredProducts = list.filter(({ price }) => {
     return price >= priceRangeStart && price <= priceRangeEnd;
