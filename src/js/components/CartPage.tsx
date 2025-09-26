@@ -1,12 +1,12 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import Product from "./Product";
 import NoResults from "./NoResults";
 import Header from "./Header";
+import { RootState } from "@/store";
 
-function CartPage() {
-  const { entities: cartItems, count } = useSelector((state) => state.cart);
+const CartPage = () => {
+  const { entities: cartItems, count } = useSelector((state: RootState) => state.cart);
+
   return (
     <div className="App-page">
       <Header />
@@ -30,6 +30,6 @@ function CartPage() {
       </div>
     </div>
   );
-}
+};
 
 export default CartPage;

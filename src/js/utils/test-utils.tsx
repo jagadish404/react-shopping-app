@@ -2,17 +2,13 @@ import React, { ReactElement } from "react";
 import { render as rtlRender, RenderOptions } from "@testing-library/react";
 import { configureStore, PreloadedState } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 
-import productsReducer from "../reducers/productSlice";
-import cartReducer from "../reducers/cartSlice";
-import filterReducer from "../reducers/filterSlice";
-
-// Define the root state type
-export type RootState = {
-  products: ReturnType<typeof productsReducer>;
-  cart: ReturnType<typeof cartReducer>;
-  filters: ReturnType<typeof filterReducer>;
-};
+import productsReducer from "@/js/reducers/productSlice";
+import cartReducer from "@/js/reducers/cartSlice";
+import filterReducer from "@/js/reducers/filterSlice";
+import { RootState } from "@/store";
+import productData from "../../../public/data/products.json";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
   route?: string;
@@ -20,11 +16,25 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, "wrapper"> {
   store?: ReturnType<typeof configureStore>;
 }
 
+const preloadedData: PreloadedState<RootState> = {
+  products: {
+    entities: productData.products,
+    status: "fulfilled",
+  },
+  cart: {
+    entities: [],
+    count: 0,
+  },
+  filters: {
+    entities: [],
+    selected: {},
+  },
+};
 function render(
   ui: ReactElement,
   {
     route = "/",
-    preloadedState,
+    preloadedState = preloadedData,
     store = configureStore({
       reducer: {
         products: productsReducer,
@@ -42,7 +52,11 @@ function render(
   }
 
   function Wrapper({ children }: { children?: React.ReactNode }) {
-    const content = <Provider store={store}>{children}</Provider>;
+    const content = (
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
+      </Provider>
+    );
 
     return content;
   }

@@ -1,118 +1,118 @@
 .App {
-	height: 100%;
-	text-align: center;
+  height: 100%;
+  text-align: center;
 }
 
 .App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 80px;
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
 }
 
 .App-page {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .App-header {
-	background-color: #9FC5E8;
-	padding: 7px;
-	color: white;
-	flex: 0 0 auto;
-	display: flex;
-	justify-content: space-between;
-	border: 1px solid #2f2f2f;
-	height: 50px;
-	box-sizing: border-box;
+  background-color: #9fc5e8;
+  padding: 7px;
+  color: white;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #2f2f2f;
+  height: 50px;
+  box-sizing: border-box;
 }
 
 .App-footer {
-	flex: 0 0 auto;
-	background-color: #CFE2F3;
+  flex: 0 0 auto;
+  background-color: #cfe2f3;
 }
 
 .App-title {
-	font-size: 1.5em;
-	margin: 0;
-	line-height: 40px;
-	color: #2f2f2f;
+  font-size: 1.5em;
+  margin: 0;
+  line-height: 40px;
+  color: #2f2f2f;
 }
 
 .App-intro {
-	font-size: large;
+  font-size: large;
 }
 
 .App-button {
-	min-height: 22px;
-	border: 1px solid #2f2f2f;
-	padding: 0 1em;
-	line-height: 2.5em;
-	font-weight: bold;
-	margin-left: 0.8em;
-	cursor: pointer;
+  min-height: 22px;
+  border: 1px solid #2f2f2f;
+  padding: 0 1em;
+  line-height: 2.5em;
+  font-weight: bold;
+  margin-left: 0.8em;
+  cursor: pointer;
 }
 
 .Browse-button {
-	background-color: #CFE2F3;
+  background-color: #cfe2f3;
 }
 
 .Cart-button {
-	background-color: #E06666;
+  background-color: #e06666;
 }
 
 .Add-to-cart-button {
-	background-color: #E06666;
+  background-color: #e06666;
 }
 
 .App-body {
-	flex: 1 1 auto;
-	display: flex;
-	border: 1px solid #2f2f2f;
-	background-color: #CFE2F3;
+  flex: 1 1 auto;
+  display: flex;
+  border: 1px solid #2f2f2f;
+  background-color: #cfe2f3;
 }
 
 .Left-panel {
-	background-color: #6FA8DC;
-	border: 1px solid #2f2f2f;
-	border-top: none;
-	display: flex;
-	flex-direction: column;
-	padding: 20px 20px 0;
-	align-items: flex-start;
-	text-align: left;
-	flex: 0 0 auto;
+  background-color: #6fa8dc;
+  border: 1px solid #2f2f2f;
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 0;
+  align-items: flex-start;
+  text-align: left;
+  flex: 0 0 auto;
 }
 
 .Right-panel {
-	flex: 1;
+  flex: 1;
 }
 
 .Product-filters {
-	margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 .Product-filter-name {
-	text-transform: capitalize;
-	margin-bottom: 0.5em;
+  text-transform: capitalize;
+  margin-bottom: 0.5em;
 }
 
 .Product-filter-value {
-	padding-left: 0.5em;
-	line-height: 1.5em;
+  padding-left: 0.5em;
+  line-height: 1.5em;
 }
 
 .No-results {
-	align-self: center;
-	font-weight: bold;
-	font-size: 16px;
-	margin: 0px auto;
+  align-self: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0px auto;
 }
 
 @keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

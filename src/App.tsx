@@ -9,13 +9,11 @@ class App extends PureComponent {
   render() {
     return (
       <div className="App">
-        <Router>
-          <Routes>
-            <Route path="/" element={<ProductsList />} />
-            <Route path="/ProductDetails/:productIndex" element={<ProductDetails />} />
-            <Route path="/CartPage" element={<CartPage />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path="/" element={<ProductsList />} />
+          <Route path="/ProductDetails/:productIndex" element={<ProductDetails />} />
+          <Route path="/CartPage" element={<CartPage />} />
+        </Routes>
       </div>
     );
   }

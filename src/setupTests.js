@@ -1,8 +1,7 @@
 import "@testing-library/jest-dom";
-import { vi } from "vitest";
+import { cleanup } from "@testing-library/react";
+import { afterEach, vi } from "vitest";
 
-// Setup global fetch mock for Vitest
-Object.defineProperty(window, "fetch", {
-  writable: true,
-  value: vi.fn(),
+afterEach(() => {
+  cleanup();
 });

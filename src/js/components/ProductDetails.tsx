@@ -1,15 +1,20 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
 
 import { addItemToCart } from "../reducers/cartSlice";
 import Header from "./Header";
 import "../../css/productDetails.css";
+import { RootState } from "@/store";
 
 function ProductDetails() {
-  const productsList = useSelector((state) => state.products.entities);
-  const { productIndex } = useParams();
+  const productsList = useSelector((state: RootState) => state.products.entities);
+  const { productIndex: index } = useParams();
+
+  if (index === undefined) {
+    return <div>Product not found</div>;
+  }
+
+  const productIndex = parseInt(index);
   const dispatch = useDispatch();
   const productsData = productsList[productIndex];
 
@@ -43,13 +48,5 @@ function ProductDetails() {
     </div>
   );
 }
-
-ProductDetails.propTypes = {
-  productIndex: PropTypes.number,
-};
-
-ProductDetails.defaultProps = {
-  productIndex: 0,
-};
 
 export default ProductDetails;
