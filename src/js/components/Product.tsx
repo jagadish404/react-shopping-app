@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { addItemToCart } from "../reducers/cartSlice";
 import { ProductData } from "@/js/types";

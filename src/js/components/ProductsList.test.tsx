@@ -1,5 +1,3 @@
-import React from "react";
-
 import ProductsList from "./ProductsList";
 import productData from "../../../public/data/products.json";
 import { render, screen, fireEvent, waitFor } from "../utils/test-utils";
