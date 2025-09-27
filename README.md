@@ -8,7 +8,6 @@ A modern React single page application for shopping products with advanced filte
 - 🔍 **Smart Filtering** - Filter by brand and price range
 - 🛒 **Shopping Cart** - Add/remove products with real-time updates
 - 📄 **Product Details** - Detailed product information pages
-- 🧪 **Comprehensive Testing** - Full test coverage with Vitest
 - 🎯 **Type Safety** - Full TypeScript implementation
 
 ## 🚀 Technologies Used
@@ -32,7 +31,7 @@ A modern React single page application for shopping products with advanced filte
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
+- Node.js (v20 or higher)
 - pnpm (recommended) or npm
 
 ### Installation
