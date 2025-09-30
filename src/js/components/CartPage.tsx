@@ -3,7 +3,6 @@ import { Stack, styled, Typography } from "@mui/material";
 
 import Product from "./Product";
 import NoResults from "./NoResults";
-import Header from "./Header";
 import { RootState } from "@/store";
 
 const ProductsGrid = styled(Stack)({

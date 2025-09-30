@@ -39,7 +39,7 @@ function ProductDetails() {
   const { productIndex: index } = useParams();
 
   if (index === undefined) {
-    return <div>Product not found</div>;
+    return <Alert severity="error">Product not found</Alert>;
   }
 
   const productIndex = parseInt(index);

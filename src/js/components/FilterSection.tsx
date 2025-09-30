@@ -1,9 +1,8 @@
-import { Component, SyntheticEvent } from "react";
-import { FilterData, FilterType } from "../types";
+import { FilterType } from "../types";
 import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
 import { selectFilter } from "../reducers/filterSlice";
-import { Box, Checkbox, FormControlLabel, Stack } from "@mui/material";
+import { Alert, Box, Checkbox, FormControlLabel, Stack } from "@mui/material";
 
 const FilterSection = () => {
   const { entities: filters, selected: filtersSelected } = useSelector((state: RootState) => state.filters);
@@ -31,7 +30,7 @@ const FilterSection = () => {
   };
 
   if (filters.length === 0) {
-    return <div>No filters!!</div>;
+    return <Alert severity="info">No filters!!</Alert>;
   }
 
   return (

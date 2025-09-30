@@ -6,7 +6,7 @@ import NoResults from "./NoResults";
 
 import { fetchData } from "../reducers/productSlice";
 import { RootState, useAppDispatch } from "@/store";
-import { Stack, styled, Typography } from "@mui/material";
+import { Alert, Stack, styled, Typography } from "@mui/material";
 
 const ProductsGrid = styled(Stack)({
   flexDirection: "row",
@@ -63,7 +63,7 @@ const ProductsList = () => {
           )}
         </ProductsGrid>
       )}
-      {fetchStatus === "failed" && <div>Error while fetching data!!</div>}
+      {fetchStatus === "failed" && <Alert severity="error">Error while fetching data!!</Alert>}
     </>
   );
 };
