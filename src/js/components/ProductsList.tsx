@@ -4,13 +4,15 @@ import { useSelector } from "react-redux";
 import Product from "./Product";
 import NoResults from "./NoResults";
 
-import "../../css/productsList.css";
-
 import { fetchData } from "../reducers/productSlice";
-import FilterSection from "./FilterSection";
-import Header from "./Header";
 import { RootState, useAppDispatch } from "@/store";
-import { Stack, Typography } from "@mui/material";
+import { Stack, styled, Typography } from "@mui/material";
+
+const ProductsGrid = styled(Stack)({
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-evenly",
+});
 
 const ProductsList = () => {
   const dispatch = useAppDispatch();
@@ -47,13 +49,7 @@ const ProductsList = () => {
       <Typography variant="h5">Products List</Typography>
       {fetchStatus === "pending" && <div>Loading products..</div>}
       {fetchStatus === "fulfilled" && (
-        <Stack
-          sx={{
-            flexDirection: { xs: "column", md: "row" },
-            flexWrap: "wrap",
-            justifyContent: "space-evenly",
-          }}
-        >
+        <ProductsGrid>
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product, index) => (
               <Product
@@ -65,7 +61,7 @@ const ProductsList = () => {
           ) : (
             <NoResults content="No products!" />
           )}
-        </Stack>
+        </ProductsGrid>
       )}
       {fetchStatus === "failed" && <div>Error while fetching data!!</div>}
     </>

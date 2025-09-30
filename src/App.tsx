@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import ProductsList from "./js/components/ProductsList";
 import ProductDetails from "./js/components/ProductDetails";
 import CartPage from "./js/components/CartPage";
-import "./css/App.css";
 import Layout from "./js/components/Layout";
 
 import "@fontsource/roboto/300.css";

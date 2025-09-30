@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { addItemToCart } from "../reducers/cartSlice";
 import { ProductData } from "@/js/types";
 
-import "../../css/productsList.css";
 import { useAppDispatch } from "@/store";
 import { Button, ButtonGroup, Card, CardActions, CardContent, styled, Typography } from "@mui/material";
 
@@ -57,7 +56,7 @@ const Product: React.FC<ProductProps> = ({ product, productIndex, count = 0 }) =
         <ButtonGroup variant="outlined" aria-label="outlined button group">
           <Button variant="outlined">-</Button>
           <Button variant="contained" size="large" fullWidth={false} onClick={handleAddToCart}>
-            Add To Cart
+            Add To Cart {count > 0 ? `(${count})` : ""}
           </Button>
           <Button variant="outlined">+</Button>
         </ButtonGroup>

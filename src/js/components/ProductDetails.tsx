@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { addItemToCart } from "../reducers/cartSlice";
-import "../../css/productDetails.css";
 import { RootState, useAppDispatch } from "@/store";
 import { Alert, Box, Button, ButtonGroup, Paper, Stack, styled, Typography } from "@mui/material";
 
