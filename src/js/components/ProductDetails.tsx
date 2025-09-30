@@ -2,9 +2,38 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { addItemToCart } from "../reducers/cartSlice";
-import Header from "./Header";
 import "../../css/productDetails.css";
 import { RootState, useAppDispatch } from "@/store";
+import { Alert, Box, Button, ButtonGroup, Paper, Stack, styled, Typography } from "@mui/material";
+
+const ProductImage = styled("img")({
+  maxWidth: "200px",
+  maxHeight: "300px",
+  height: "100%",
+});
+
+const ProductDetailsContainer = styled(Paper)({
+  padding: "1rem",
+  backgroundColor: "warning.main",
+});
+
+const ProductRow = styled(Stack)({
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-between",
+});
+
+const ProductLeftCol = styled(Stack)({
+  flexBasis: "300px",
+  alignItems: "center",
+  justifyContent: "center",
+  mr: "1rem",
+});
+
+const ProductRightCol = styled(Stack)({
+  flex: "1 1 50%",
+  alignItems: "flex-start",
+});
 
 function ProductDetails() {
   const productsList = useSelector((state: RootState) => state.products.entities);
@@ -23,29 +52,36 @@ function ProductDetails() {
   };
 
   return (
-    <div className="App-page">
-      <Header />
+    <>
       {productsData == void 0 ? (
-        <div>Error fetching product details!</div>
+        <Box>
+          <Alert severity="error">Error fetching product details!</Alert>
+        </Box>
       ) : (
-        <div className="Product-details-wrapper">
-          <div className="Product-name-detail">{productsData.name}</div>
-          <div className="Product-row">
-            <div className="Product-left-column">
-              <img className="Product-icon-details" alt={productsData.image} src={`../assets/${productsData.image}`} />
-            </div>
-            <div className="Product-right-column">
-              <div className="Product-measurement">{productsData.measurement}</div>
-              <div className="Product-price">${productsData.price}</div>
-              <div className="Product-desc">{productsData.desc}</div>
-              <button type="button" className="Add-to-cart-button" onClick={addToCart}>
-                Add To Cart
-              </button>
-            </div>
-          </div>
-        </div>
+        <ProductDetailsContainer elevation={3}>
+          <Typography variant="h6" component={"div"} mb={1}>
+            {productsData.name}
+          </Typography>
+          <ProductRow>
+            <ProductLeftCol>
+              <ProductImage alt={productsData.image} src={`../assets/${productsData.image}`} />
+            </ProductLeftCol>
+            <ProductRightCol spacing={2}>
+              <Typography variant="body1">{productsData.measurement}</Typography>
+              <Typography variant="h6">${productsData.price}</Typography>
+              <Typography variant="body1">{productsData.desc}</Typography>
+              <ButtonGroup variant="outlined" aria-label="outlined button group">
+                <Button variant="outlined">-</Button>
+                <Button variant="contained" size="large" fullWidth={false} onClick={addToCart}>
+                  Add To Cart
+                </Button>
+                <Button variant="outlined">+</Button>
+              </ButtonGroup>
+            </ProductRightCol>
+          </ProductRow>
+        </ProductDetailsContainer>
       )}
-    </div>
+    </>
   );
 }
 
