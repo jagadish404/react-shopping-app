@@ -54,11 +54,9 @@ const Product: React.FC<ProductProps> = ({ product, productIndex, count = 0 }) =
       </ProductCardContent>
       <CardActions>
         <ButtonGroup variant="outlined" aria-label="outlined button group">
-          <Button variant="outlined">-</Button>
           <Button variant="contained" size="large" fullWidth={false} onClick={handleAddToCart}>
             Add To Cart {count > 0 ? `(${count})` : ""}
           </Button>
-          <Button variant="outlined">+</Button>
         </ButtonGroup>
       </CardActions>
     </ProductCard>

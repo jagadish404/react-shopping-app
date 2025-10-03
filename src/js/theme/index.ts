@@ -2,7 +2,6 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   palette: {
-    // contrastThreshold: 5,
     primary: {
       main: "#50514F",
     },

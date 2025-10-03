@@ -13,7 +13,6 @@ const FilterSection = () => {
 
     if (dataFilter && dataFilter.length === 2) {
       const [type, value] = dataFilter;
-      console.log("dispatch");
 
       dispatch(selectFilter({ type: type as FilterType, value }));
     }

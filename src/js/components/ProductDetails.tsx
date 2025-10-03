@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
-import { addItemToCart } from "../reducers/cartSlice";
-import { RootState, useAppDispatch } from "@/store";
 import { Alert, Box, Button, ButtonGroup, Paper, Stack, styled, Typography } from "@mui/material";
+
+import { addItemToCart } from "@/js/reducers/cartSlice";
+import { RootState, useAppDispatch } from "@/store";
 
 const ProductImage = styled("img")({
   maxWidth: "200px",
@@ -13,7 +13,6 @@ const ProductImage = styled("img")({
 
 const ProductDetailsContainer = styled(Paper)({
   padding: "1rem",
-  backgroundColor: "warning.main",
 });
 
 const ProductRow = styled(Stack)({
@@ -70,11 +69,9 @@ function ProductDetails() {
               <Typography variant="h6">${productsData.price}</Typography>
               <Typography variant="body1">{productsData.desc}</Typography>
               <ButtonGroup variant="outlined" aria-label="outlined button group">
-                <Button variant="outlined">-</Button>
                 <Button variant="contained" size="large" fullWidth={false} onClick={addToCart}>
                   Add To Cart
                 </Button>
-                <Button variant="outlined">+</Button>
               </ButtonGroup>
             </ProductRightCol>
           </ProductRow>
