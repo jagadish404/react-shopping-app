@@ -1,9 +1,11 @@
+import { Typography } from "@mui/material";
+
 const ProductNotFound = () => {
   return (
-    <div className="product-not-found">
-      <h2>Product Not Found</h2>
-      <p>The product you are looking for does not exist.</p>
-    </div>
+    <Typography align="center" sx={{ mt: 4 }}>
+      <Typography variant="h2">Product Not Found</Typography>
+      <Typography variant="body1">The product you are looking for does not exist.</Typography>
+    </Typography>
   );
 };
 

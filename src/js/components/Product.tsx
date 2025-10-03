@@ -2,15 +2,37 @@ import { Link } from "react-router-dom";
 import { addItemToCart } from "../reducers/cartSlice";
 import { ProductData } from "@/js/types";
 
-import "../../css/productsList.css";
 import { useAppDispatch } from "@/store";
+import { Button, ButtonGroup, Card, CardActions, CardContent, styled, Typography } from "@mui/material";
 
-// Define the component props interface
 interface ProductProps {
   product: ProductData;
   productIndex: number;
   count?: number;
 }
+
+const ProductCard = styled(Card)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "1rem",
+  maxHeight: "400px",
+  width: "250px",
+  margin: "1rem",
+  gap: "0.25rem",
+});
+
+const ProductCardContent = styled(CardContent)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "0.5rem",
+  flex: "1 1 auto",
+});
+
+const ProductImage = styled("img")({
+  minWidth: "80px",
+});
 
 const Product: React.FC<ProductProps> = ({ product, productIndex, count = 0 }) => {
   const dispatch = useAppDispatch();
@@ -22,16 +44,22 @@ const Product: React.FC<ProductProps> = ({ product, productIndex, count = 0 }) =
   };
 
   return (
-    <div className="Product-card">
-      <Link to={`/ProductDetails/${productIndex}`}>
-        <img data-testid="product-image" className="Product-icon" alt={image} src={`./assets/${image}`} />
-      </Link>
-      <span className="Product-name">{name}</span>
-      <span className="Product-price">${price}</span>
-      <button type="button" className="App-button Add-to-cart" onClick={handleAddToCart}>
-        Add To Cart {count > 0 ? `(${count})` : ""}
-      </button>
-    </div>
+    <ProductCard>
+      <ProductCardContent>
+        <Link to={`/ProductDetails/${productIndex}`}>
+          <ProductImage data-testid="product-image" alt={image} src={`./assets/${image}`} />
+        </Link>
+        <Typography align="center">{name}</Typography>
+        <Typography variant="h6">${price}</Typography>
+      </ProductCardContent>
+      <CardActions>
+        <ButtonGroup variant="outlined" aria-label="outlined button group">
+          <Button variant="contained" size="large" fullWidth={false} onClick={handleAddToCart}>
+            Add To Cart {count > 0 ? `(${count})` : ""}
+          </Button>
+        </ButtonGroup>
+      </CardActions>
+    </ProductCard>
   );
 };
 

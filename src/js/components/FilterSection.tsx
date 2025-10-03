@@ -1,13 +1,23 @@
-import { Component } from "react";
-import { FilterData, FilterType } from "../types";
+import { FilterType } from "../types";
+import { RootState, useAppDispatch } from "@/store";
+import { useSelector } from "react-redux";
+import { selectFilter } from "../reducers/filterSlice";
+import { Alert, Box, Checkbox, FormControlLabel, Stack } from "@mui/material";
 
-interface FilterSectionProps {
-  filters: FilterData[];
-  filtersSelected: { [key in FilterType]?: string[] };
-  onFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+const FilterSection = () => {
+  const { entities: filters, selected: filtersSelected } = useSelector((state: RootState) => state.filters);
+  const dispatch = useAppDispatch();
 
-const FilterSection = ({ filters, filtersSelected, onFilterChange }: FilterSectionProps) => {
+  const updateFilter = (value: string) => {
+    const dataFilter = value.split("_");
+
+    if (dataFilter && dataFilter.length === 2) {
+      const [type, value] = dataFilter;
+
+      dispatch(selectFilter({ type: type as FilterType, value }));
+    }
+  };
+
   const isChecked = (filterName: FilterType, value: string) => {
     if (!filtersSelected[filterName]) {
       return false;
@@ -19,30 +29,29 @@ const FilterSection = ({ filters, filtersSelected, onFilterChange }: FilterSecti
   };
 
   if (filters.length === 0) {
-    return <div>No filters!!</div>;
+    return <Alert severity="info">No filters!!</Alert>;
   }
 
   return (
-    <div>
+    <>
       {filters.map((filter) => (
-        <div className="Product-filters" key={filter.name}>
-          <div className="Product-filter-name">{filter.name}</div>
+        <Stack mb={2} key={filter.name}>
+          <Box mb={1} textTransform={"capitalize"}>
+            {filter.name}
+          </Box>
           {filter.values.map((value) => (
-            <div className="Product-filter-value" key={`${filter.name}_${value}`}>
-              <input
-                type="checkbox"
-                data-filter={`${filter.name}_${value}`}
-                id={`${filter.name}_${value}`}
-                name={filter.name}
-                onChange={onFilterChange}
-                checked={isChecked(filter.name, value)}
-              />
-              <label htmlFor={`${filter.name}_${value}`}>{value}</label>
-            </div>
+            <FormControlLabel
+              control={<Checkbox size="small" />}
+              label={value}
+              key={`${filter.name}_${value}`}
+              data-filter={`${filter.name}_${value}`}
+              onChange={() => updateFilter(`${filter.name}_${value}`)}
+              checked={isChecked(filter.name, value)}
+            />
           ))}
-        </div>
+        </Stack>
       ))}
-    </div>
+    </>
   );
 };
 

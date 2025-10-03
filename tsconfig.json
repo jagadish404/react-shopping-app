@@ -16,7 +16,8 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "checkJs": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
