@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Alert, Box, Stack, styled, Typography } from "@mui/material";
 
 import Product from "./Product";
 import NoResults from "./NoResults";
-
 import { fetchData } from "../reducers/productSlice";
 import { RootState, useAppDispatch } from "@/store";
-import { Alert, Stack, styled, Typography } from "@mui/material";
+import FilterSection from "./FilterSection";
 
 const ProductsGrid = styled(Stack)({
   flexDirection: "row",
   flexWrap: "wrap",
-  justifyContent: "space-evenly",
+  justifyContent: "space-between",
+  gap: "1rem",
 });
 
 const ProductsList = () => {
@@ -45,26 +46,33 @@ const ProductsList = () => {
   }
 
   return (
-    <>
-      <Typography variant="h5">Products List</Typography>
-      {fetchStatus === "pending" && <div>Loading products..</div>}
-      {fetchStatus === "fulfilled" && (
-        <ProductsGrid>
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, index) => (
-              <Product
-                key={`${product.brand}_${product.name}_${product.price}`}
-                product={product}
-                productIndex={index}
-              />
-            ))
-          ) : (
-            <NoResults content="No products!" />
-          )}
-        </ProductsGrid>
-      )}
-      {fetchStatus === "failed" && <Alert severity="error">Error while fetching data!!</Alert>}
-    </>
+    <Stack component="section" direction={"row"} flex={"1 1 auto"} sx={{ columnGap: 2 }}>
+      <Box component="aside" flex={"0 0 auto"} sx={{ p: 2, bgcolor: "background.paper" }}>
+        <FilterSection />
+      </Box>
+      <Box component={"section"} sx={{ p: 2, bgcolor: "background.paper" }} flex={"1 1 auto"}>
+        <Typography variant="h6" mb={1}>
+          Products List
+        </Typography>
+        {fetchStatus === "pending" && <div>Loading products..</div>}
+        {fetchStatus === "fulfilled" && (
+          <ProductsGrid>
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((product, index) => (
+                <Product
+                  key={`${product.brand}_${product.name}_${product.price}`}
+                  product={product}
+                  productIndex={index}
+                />
+              ))
+            ) : (
+              <NoResults content="No products!" />
+            )}
+          </ProductsGrid>
+        )}
+        {fetchStatus === "failed" && <Alert severity="error">Error while fetching data!!</Alert>}
+      </Box>
+    </Stack>
   );
 };
 

@@ -11,6 +11,7 @@
   ],
   "products": [
     {
+      "id": 1,
       "name": "NutriWell Barley",
       "price": "2.25",
       "brand": "NutriWell",
@@ -19,6 +20,7 @@
       "image": "product1.jpg"
     },
     {
+      "id": 2,
       "name": "NutriWell LemonGrass With Ginger",
       "price": "2.35",
       "brand": "NutriWell",
@@ -27,6 +29,7 @@
       "image": "product2.jpg"
     },
     {
+      "id": 3,
       "name": "NutriWell Water Chestnut And Sugar Cane",
       "price": "1.25",
       "brand": "NutriWell",
@@ -35,6 +38,7 @@
       "image": "product3.jpg"
     },
     {
+      "id": 4,
       "name": "NutriWell Chrysanthemus With Wolfberry",
       "price": "2.25",
       "brand": "NutriWell",
@@ -43,6 +47,7 @@
       "image": "product4.jpg"
     },
     {
+      "id": 5,
       "name": "Marigold Uji Cha - Yuzu Green Tea",
       "price": "2.05",
       "brand": "Marigold",
@@ -51,6 +56,7 @@
       "image": "product5.jpg"
     },
     {
+      "id": 6,
       "name": "Marigold Uji Cha Momo Green Tea",
       "price": "2.25",
       "brand": "MARIGOLD",
@@ -59,6 +65,7 @@
       "image": "product6.jpg"
     },
     {
+      "id": 7,
       "name": "NutriWell LemonGrass With Ginger",
       "price": "1.50",
       "brand": "NutriWell",
@@ -67,6 +74,7 @@
       "image": "product7.jpg"
     },
     {
+      "id": 8,
       "name": "NutriWell Barley",
       "price": "0.50",
       "brand": "NutriWell",

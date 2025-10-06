@@ -2,11 +2,12 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
+import { PersistGate } from "redux-persist/integration/react";
 
-import store from "./store";
-import "./css/index.css";
+import store, { persistor } from "./store";
+import "@/css/index.css";
 import App from "./App";
-import theme from "./js/theme";
+import theme from "@/js/theme";
 
 const container = document.getElementById("root");
 if (!container) {
@@ -16,10 +17,12 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </PersistGate>
   </Provider>
 );

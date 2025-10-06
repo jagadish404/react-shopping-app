@@ -2,13 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ProductData } from "@/js/types";
 
 interface CartState {
-  entities: ProductData[];
-  count: number;
+  items: {
+    productId: number;
+    product: ProductData;
+    count: number;
+  }[];
+  totalCount: number;
 }
 
 const initialState: CartState = {
-  entities: [],
-  count: 0,
+  items: [],
+  totalCount: 0,
 };
 
 export const counterSlice = createSlice({
@@ -16,13 +20,30 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart: (state, action) => {
-      state.entities.push(action.payload);
-      state.count += 1;
+      let existingItem = state.items.find((item) => item.productId === action.payload.id);
+      if (existingItem) {
+        existingItem.count += 1;
+      } else {
+        state.items.push({ productId: action.payload.id, product: action.payload, count: 1 });
+      }
+      state.totalCount += 1;
+    },
+    removeItemFromCart: (state, action) => {
+      let existingItemIndex = state.items.findIndex((item) => item.productId === action.payload.id);
+      if (existingItemIndex !== -1) {
+        let existingItem = state.items[existingItemIndex];
+        if (existingItem.count > 1) {
+          existingItem.count -= 1;
+        } else {
+          state.items.splice(existingItemIndex, 1);
+        }
+        state.totalCount -= 1;
+      }
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addItemToCart } = counterSlice.actions;
+export const { addItemToCart, removeItemFromCart } = counterSlice.actions;
 
 export default counterSlice.reducer;

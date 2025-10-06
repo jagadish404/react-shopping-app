@@ -18,8 +18,8 @@ const ProductCard = styled(Card)({
   padding: "1rem",
   maxHeight: "400px",
   width: "250px",
-  margin: "1rem",
   gap: "0.25rem",
+  flex: "1 1 auto",
 });
 
 const ProductCardContent = styled(CardContent)({

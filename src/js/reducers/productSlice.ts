@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductData } from "@/js/types";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ProductData, ProductsResponse } from "@/js/types";
+import products from "@/data/products.json";
 
 interface ProductSliceData {
   entities: ProductData[];
@@ -12,14 +13,12 @@ const initialState: ProductSliceData = {
 };
 
 export const fetchData = createAsyncThunk("products/fetchData", async () => {
-  const data = await fetch("./data/products.json", {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
+  // Mocking an async fetch with a timeout
+  return new Promise<ProductsResponse>((resolve) => {
+    setTimeout(() => {
+      resolve(products as ProductsResponse);
+    }, 1000);
   });
-  const res = await data.json();
-  return res;
 });
 
 const filterProductsByPrice = (value: string, list: ProductData[]) => {

@@ -8,6 +8,9 @@ const theme = createTheme({
     secondary: {
       main: "#CBD4C2",
     },
+    background: {
+      default: "#f3f4f6",
+    },
   },
   typography: {
     fontSize: 14,

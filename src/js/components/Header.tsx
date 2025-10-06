@@ -13,27 +13,25 @@ const Link = styled(ReactRouterLink)({
 });
 
 const Header = () => {
-  const itemsCount = useSelector((state: RootState) => state.cart.count);
+  const itemsCount = useSelector((state: RootState) => state.cart.totalCount);
   return (
-    <Box component="header">
-      <AppBar position="static">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-            <Link to="/">
-              <Typography variant="h4">React Store</Typography>
-            </Link>
-            <Link to="/CartPage">
-              <IconButton color="inherit">
-                <Typography variant="h6">Cart</Typography>
-                <Badge badgeContent={itemsCount ?? "0"} color="secondary">
-                  <ShoppingCartIcon fontSize="large" />
-                </Badge>
-              </IconButton>
-            </Link>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Box>
+    <AppBar position="sticky">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Link to="/">
+            <Typography variant="h4">React Store</Typography>
+          </Link>
+          <Link to="/CartPage">
+            <IconButton color="inherit">
+              <Typography variant="h6">Cart</Typography>
+              <Badge badgeContent={itemsCount ?? "0"} color="secondary">
+                <ShoppingCartIcon fontSize="large" />
+              </Badge>
+            </IconButton>
+          </Link>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

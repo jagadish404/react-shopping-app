@@ -1,6 +1,7 @@
 export type FilterType = "price" | "brand";
 
 export interface ProductData {
+  id: number;
   brand: string;
   name: string;
   price: string;
