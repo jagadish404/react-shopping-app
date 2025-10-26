@@ -1,8 +1,8 @@
 import { FilterType } from "../types";
 import { RootState, useAppDispatch } from "@/store";
 import { useSelector } from "react-redux";
-import { selectFilter } from "../reducers/filterSlice";
-import { Alert, Box, Checkbox, FormControlLabel, Stack } from "@mui/material";
+import { selectFilter, clearFilter } from "../reducers/filterSlice";
+import { Alert, Box, Button, Checkbox, FormControlLabel, Stack, Typography } from "@mui/material";
 
 const FilterSection = () => {
   const { entities: filters, selected: filtersSelected } = useSelector((state: RootState) => state.filters);
@@ -16,6 +16,10 @@ const FilterSection = () => {
 
       dispatch(selectFilter({ type: type as FilterType, value }));
     }
+  };
+
+  const clearFilterByType = (filterName: FilterType) => {
+    dispatch(clearFilter({ type: filterName }));
   };
 
   const isChecked = (filterName: FilterType, value: string) => {
@@ -35,10 +39,20 @@ const FilterSection = () => {
   return (
     <>
       {filters.map((filter) => (
-        <Stack mb={2} key={filter.name}>
-          <Box mb={1} textTransform={"capitalize"}>
-            {filter.name}
-          </Box>
+        <Stack mb={1} key={filter.name} sx={{ borderBottom: "1px solid #ccc", pb: 1 }}>
+          <Stack
+            mb={1}
+            textTransform={"capitalize"}
+            sx={{ justifyContent: "space-between", alignItems: "center" }}
+            direction={"row"}
+          >
+            <Typography variant="body1" fontWeight={600}>
+              {filter.name}
+            </Typography>
+            <Button variant="text" onClick={() => clearFilterByType(filter.name)}>
+              Clear
+            </Button>
+          </Stack>
           {filter.values.map((value) => (
             <FormControlLabel
               control={<Checkbox size="small" />}

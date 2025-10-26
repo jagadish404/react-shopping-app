@@ -25,6 +25,10 @@ export const counterSlice = createSlice({
         state.selected[filterType]?.push(filterValue);
       }
     },
+    clearFilter: (state, action: PayloadAction<{ type: FilterType }>) => {
+      const { type: filterType } = action.payload;
+      state.selected[filterType] = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action: PayloadAction<ProductsResponse>) => {
@@ -41,6 +45,6 @@ export const counterSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { selectFilter } = counterSlice.actions;
+export const { selectFilter, clearFilter } = counterSlice.actions;
 
 export default counterSlice.reducer;
